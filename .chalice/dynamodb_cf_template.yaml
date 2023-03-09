@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Resources:
+  chaliceDemo:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: car-details
+      AttributeDefinitions:
+        - AttributeName: "car-number"
+          AttributeType: "S"
+        - AttributeName: "license-number"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "car-number"
+          KeyType: "HASH"
+        - AttributeName: "license-number"
+          KeyType: "RANGE"
+
+      ProvisionedThroughput:
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+
+Outputs:
+  TableName:
+    Value: !Ref "chaliceDemo"
+    Description: Name of the newly created DynamoDB table
